@@ -8,17 +8,17 @@ import pages.CategoryLessonsPage;
 
 public class NavigationMenuComponent extends BaseComponent<NavigationMenuComponent> {
 
-  @FindBy(css = ".nav:not(.hide-xs) .course-categories__nav-box")
-  private WebElement navComponent;
+    @FindBy(css = ".nav:not(.hide-xs) .course-categories__nav-box")
+    private WebElement navComponent;
 
-  public NavigationMenuComponent(WebDriver driver) {
-    super(driver);
-  }
+    public NavigationMenuComponent(WebDriver driver) {
+        super(driver);
+    }
 
-  public CategoryLessonsPage clickNavItem(String itemName) {
-    navComponent.findElement(By.cssSelector(String.format("a[title='%s']", itemName))).click();
+    public CategoryLessonsPage clickNavItem(String itemName) {
+        navComponent.findElement(By.cssSelector(String.format("a[title='%s']", itemName))).click();
 
-    return new CategoryLessonsPage(driver);
-  }
+        return new CategoryLessonsPage(driver);
+    }
 
 }
