@@ -1,48 +1,59 @@
 package com.otus.steps;
 
 import com.otus.components.NavigationMenuComponent;
-import com.otus.driver.DriverFactory;
+import com.otus.dao.CourseTileItem;
+import com.otus.exceptions.DriverTypeNotSupported;
 import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import io.cucumber.java.ru.Дано;
 import io.cucumber.java.ru.Если;
 import io.cucumber.java.ru.Пусть;
 import io.cucumber.java.ru.Тогда;
 import org.openqa.selenium.WebDriver;
+import pages.CategoryLessonsPage;
 import pages.MainPage;
 
-public class MainPageSteps {
+import java.util.List;
 
-  private WebDriver driver = null;
+import static org.assertj.core.api.Assertions.assertThat;
 
-  private MainPage mainPage = null;
+public class MainPageSteps extends BaseSteps {
 
-  @Before
-  public void initDriver() {
-    driver = new DriverFactory().getDriver();
-  }
+    private WebDriver driver = null;
 
-  @After
-  public void closeDriver() {
-    if(driver != null) {
-      driver.close();
-      driver.quit();
+    private MainPage mainPage = null;
+
+    @Дано("открыт браузер {string}")
+    @Override
+    public void initBrowser(String nameBrowser) throws DriverTypeNotSupported {
+        super.initBrowser(nameBrowser);
+        driver = baseDriver;
     }
-  }
 
-  @Пусть("^Открыта главная страница otus в браузере$")
-  public void openMainPage() {
-    mainPage = new MainPage(driver)
-        .open();
-  }
+    @After
+    public void closeDriver() {
+        if (driver != null) {
+            driver.close();
+            driver.quit();
+        }
+    }
 
-  @Тогда("Главная страница открыта и заголовок {string}")
-  public void pageShouldBeOpened(String expectedHeader) {
-    mainPage.pageHeaderShouldBeSameAs(expectedHeader);
-  }
+    @Пусть("^Открыта главная страница otus в браузере$")
+    public void openMainPage() {
+        mainPage = new MainPage(driver)
+                .open();
+    }
 
-  @Если("Кликнуть на категорию курса {string}")
-  public void clickNavMenuItem(String itemName) {
-    new NavigationMenuComponent(driver).clickNavItem(itemName);
-  }
+    @Тогда("Главная страница открыта и заголовок {string}")
+    public void pageShouldBeOpened(String expectedHeader) {
+        mainPage.pageHeaderShouldBeSameAs(expectedHeader);
+    }
+
+    @Если("Кликнуть на категорию курса {string}")
+    public void clickNavMenuItem(String itemName) {
+        CategoryLessonsPage categoryLessonsPage = new NavigationMenuComponent(driver).clickNavItem(itemName);
+        List<CourseTileItem> allLessons = categoryLessonsPage.baseCourseTileComponent.getAllLessons();
+        assertThat(allLessons.size()).isGreaterThan(0);
+        System.out.println(allLessons.size());
+    }
 
 }
