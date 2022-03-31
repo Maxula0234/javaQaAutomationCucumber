@@ -1,5 +1,6 @@
 package com.otus.components;
 
+import com.otus.support.GuiceScoped;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,14 +12,14 @@ public class NavigationMenuComponent extends BaseComponent<NavigationMenuCompone
     @FindBy(css = ".nav:not(.hide-xs) .course-categories__nav-box")
     private WebElement navComponent;
 
-    public NavigationMenuComponent(WebDriver driver) {
-        super(driver);
+    public NavigationMenuComponent(GuiceScoped guiceScoped) {
+        super(guiceScoped);
     }
 
     public CategoryLessonsPage clickNavItem(String itemName) {
         navComponent.findElement(By.cssSelector(String.format("a[title='%s']", itemName))).click();
 
-        return new CategoryLessonsPage(driver);
+        return new CategoryLessonsPage(guiceScoped);
     }
 
 }

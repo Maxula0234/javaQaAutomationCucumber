@@ -1,6 +1,7 @@
 package com.otus.components.header_menu;
 
 import com.otus.components.BaseComponent;
+import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,27 +28,27 @@ public class HeaderMenu1Component extends BaseComponent<HeaderMenu1Component> {
     @FindBy(xpath = ".//a[@title='Контакты']")
     private WebElement contacts;
 
-    public HeaderMenu1Component(WebDriver webDriver) {
-        super(webDriver);
+    public HeaderMenu1Component(GuiceScoped guiceScoped) {
+        super(guiceScoped);
     }
 
     public SubscriptionPage goToSubscription() {
         subscription.click();
-        return new SubscriptionPage(driver);
+        return new SubscriptionPage(guiceScoped);
     }
 
     public ReviewsPage goToReviews() {
         reviews.click();
-        return new ReviewsPage(driver);
+        return new ReviewsPage(guiceScoped);
     }
 
     public FaqPage goToFaqPage() {
         faq.click();
-        return new FaqPage(driver);
+        return new FaqPage(guiceScoped);
     }
 
     public ContactsPage goToContactsPage() {
         contacts.click();
-        return new ContactsPage(driver);
+        return new ContactsPage(guiceScoped);
     }
 }

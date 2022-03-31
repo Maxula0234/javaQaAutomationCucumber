@@ -1,6 +1,6 @@
 package com.otus.components;
 
-import org.openqa.selenium.WebDriver;
+import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -13,9 +13,9 @@ public class SpecializationsComponent extends BaseComponent<SpecializationsCompo
     @FindBy(xpath = ".//div[@class='lessons__new-item-container']")
     private List<WebElement> lessons;
 
-    public SpecializationsComponent(WebDriver driver) {
-        super(driver);
-        baseCourseTileComponent = new BaseCourseTileComponent(driver, lessons);
+    public SpecializationsComponent(GuiceScoped guiceScoped) {
+        super(guiceScoped);
+        baseCourseTileComponent = new BaseCourseTileComponent(guiceScoped, lessons);
     }
 
 }

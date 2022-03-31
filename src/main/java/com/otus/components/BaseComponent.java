@@ -1,5 +1,6 @@
 package com.otus.components;
 
+import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -11,13 +12,13 @@ import java.lang.reflect.InvocationTargetException;
 
 public abstract class BaseComponent<T> {
 
-    protected WebDriver driver;
+    protected GuiceScoped guiceScoped;
     protected Actions actions;
 
-    public BaseComponent(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
-        this.actions = new Actions(driver);
+    public BaseComponent(GuiceScoped guiceScoped) {
+        this.guiceScoped = guiceScoped;
+        this.actions = new Actions(guiceScoped.driver);
+        PageFactory.initElements(guiceScoped.driver, this);
 
     }
 
@@ -33,7 +34,7 @@ public abstract class BaseComponent<T> {
         actions.moveToElement(webElement).click().build().perform();
         try {
             Constructor<T> constructor = page.getConstructor(WebDriver.class);
-            return convertInstanceOfObject(constructor.newInstance(driver), page);
+            return convertInstanceOfObject(constructor.newInstance(guiceScoped.driver), page);
         } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
             e.printStackTrace();
             return null;

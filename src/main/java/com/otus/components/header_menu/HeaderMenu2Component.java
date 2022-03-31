@@ -1,6 +1,7 @@
 package com.otus.components.header_menu;
 
 import com.otus.components.BaseComponent;
+import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,8 +33,8 @@ public class HeaderMenu2Component extends BaseComponent<HeaderMenu2Component> {
     @FindBy(xpath = ".//a[@title='Kotlin Backend Developer']")
     private WebElement kotlinBackendCoursesElement;
 
-    public HeaderMenu2Component(WebDriver webDriver) {
-        super(webDriver);
+    public HeaderMenu2Component(GuiceScoped guiceScoped) {
+        super(guiceScoped);
     }
 
     public HeaderMenu2Component moveToCoursesHeaderMenu() {
@@ -69,6 +70,6 @@ public class HeaderMenu2Component extends BaseComponent<HeaderMenu2Component> {
 
     public ProgrammingCategoriesPage goToProgrammingCategoriesPage(){
         programmingHeaderSubMenuItem.click();
-        return new ProgrammingCategoriesPage(driver);
+        return new ProgrammingCategoriesPage(guiceScoped);
     }
 }

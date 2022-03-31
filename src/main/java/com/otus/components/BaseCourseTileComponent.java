@@ -2,6 +2,7 @@ package com.otus.components;
 
 import com.otus.constant.Month;
 import com.otus.dao.CourseTileItem;
+import com.otus.support.GuiceScoped;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,8 +21,8 @@ public class BaseCourseTileComponent extends BaseComponent<BaseCourseTileCompone
     By dateLessonStart = By.xpath(".//div[@class='lessons__new-item-time']");
     By nameCourse = By.xpath(".//div[contains(@class,'lessons__new-item-title_with-bg')]");
 
-    public BaseCourseTileComponent(WebDriver driver, List<WebElement> courseTile) {
-        super(driver);
+    public BaseCourseTileComponent(GuiceScoped guiceScoped, List<WebElement> courseTile) {
+        super(guiceScoped);
         this.courseTile = courseTile;
 
     }
@@ -36,7 +37,7 @@ public class BaseCourseTileComponent extends BaseComponent<BaseCourseTileCompone
                 a.setName(f.findElement(nameCourse));
                 a.setDate(f.findElement(dateLessonStart));
                 a.setThisElement(f);
-                a.setDriver(driver);
+                a.setDriver(guiceScoped.driver);
             } catch (Exception e) {
             }
 
@@ -86,11 +87,11 @@ public class BaseCourseTileComponent extends BaseComponent<BaseCourseTileCompone
 
     public LessonsBasePage clickLessons(int numLesson) {
         courseTile.get(numLesson).click();
-        return new LessonsBasePage(driver);
+        return new LessonsBasePage(guiceScoped);
     }
 
     public SpecializationBasePage clickSpecialization(int numLesson) {
         courseTile.get(numLesson).click();
-        return new SpecializationBasePage(driver);
+        return new SpecializationBasePage(guiceScoped);
     }
 }
