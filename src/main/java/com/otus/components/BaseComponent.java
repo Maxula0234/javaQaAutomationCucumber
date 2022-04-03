@@ -9,11 +9,13 @@ import pages.BasePage;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Logger;
 
 public abstract class BaseComponent<T> {
 
     protected GuiceScoped guiceScoped;
     protected Actions actions;
+   public Logger reporter = Logger.getLogger(BaseComponent.class.getName());
 
     public BaseComponent(GuiceScoped guiceScoped) {
         this.guiceScoped = guiceScoped;

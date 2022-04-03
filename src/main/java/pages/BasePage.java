@@ -5,11 +5,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.logging.Logger;
+
 public abstract class BasePage<T> {
 
     private final String path;
-
-    private GuiceScoped guiceScoped;
+    public Logger reporter = Logger.getLogger(BasePage.class.getName());
+    private final GuiceScoped guiceScoped;
 
     @FindBy(tagName = "h1")
     private WebElement header;
@@ -34,6 +36,10 @@ public abstract class BasePage<T> {
 
     public String getTitlePage() {
         return guiceScoped.driver.getTitle();
+    }
+
+    public String getHeader() {
+        return header.getText();
     }
 
 }
