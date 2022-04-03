@@ -1,9 +1,10 @@
-package pages;
+package pages.categories;
 
 import com.otus.components.BaseCourseTileComponent;
 import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.BasePage;
 
 import java.util.List;
 
