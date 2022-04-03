@@ -1,6 +1,6 @@
 package pages.services;
 
-import org.openqa.selenium.WebDriver;
+import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
@@ -19,8 +19,8 @@ public class SubscriptionPage extends BasePage<SubscriptionPage> {
     @FindBy(xpath = "//div[contains(@class,'kqgEaR')]")
     private List<WebElement> optionItemComponent;
 
-    public SubscriptionPage(WebDriver webDriver) {
-        super(webDriver, "/");
+    public SubscriptionPage(GuiceScoped guiceScoped) {
+        super(guiceScoped, "/");
     }
 
     public void checkSubscriptionPage() {

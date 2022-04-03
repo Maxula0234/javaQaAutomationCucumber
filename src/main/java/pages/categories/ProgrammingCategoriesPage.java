@@ -1,6 +1,7 @@
 package pages.categories;
 
 import com.otus.components.BaseCourseTileComponent;
+import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,9 +17,9 @@ public class ProgrammingCategoriesPage extends BasePage<ProgrammingCategoriesPag
     @FindBy(xpath = ".//div[@class='lessons__new-item-container']")
     private List<WebElement> courseTile;
 
-    public ProgrammingCategoriesPage(WebDriver driver) {
-        super(driver, "/");
-        baseCourseTileComponent = new BaseCourseTileComponent(driver, courseTile);
+    public ProgrammingCategoriesPage(GuiceScoped guiceScoped) {
+        super(guiceScoped, "/");
+        baseCourseTileComponent = new BaseCourseTileComponent(guiceScoped, courseTile);
     }
 
     public List<WebElement> getCourseTile() {

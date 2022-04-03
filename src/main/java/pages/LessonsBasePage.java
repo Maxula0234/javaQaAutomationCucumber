@@ -1,5 +1,6 @@
 package pages;
 
+import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,8 +19,8 @@ public class LessonsBasePage extends BasePage<LessonsBasePage> {
     @FindBy(xpath = "//div[@class='course-about']")
     private WebElement courseAbout;
 
-    public LessonsBasePage(WebDriver driver) {
-        super(driver, "/");
+     public LessonsBasePage(GuiceScoped guiceScoped) {
+        super(guiceScoped, "/");
     }
 
     public void checkLessonPage() {

@@ -1,6 +1,6 @@
 package com.otus.components;
 
-import org.openqa.selenium.WebDriver;
+import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -14,9 +14,9 @@ public class FavouriteCoursesComponent extends BaseComponent<FavouriteCoursesCom
     @FindBy(xpath = "//*[contains(@class, 'container-lessons')]/div[text()='Популярные курсы']//following-sibling::div/a")
     private List<WebElement> lessons;
 
-    public FavouriteCoursesComponent(WebDriver driver) {
-        super(driver);
-        baseCourseTileComponent = new BaseCourseTileComponent(driver, lessons);
+    public FavouriteCoursesComponent(GuiceScoped guiceScoped) {
+        super(guiceScoped);
+        baseCourseTileComponent = new BaseCourseTileComponent(guiceScoped, lessons);
     }
 
 }

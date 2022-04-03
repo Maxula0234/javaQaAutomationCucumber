@@ -1,6 +1,7 @@
 package com.otus.components.faqPage;
 
 import com.otus.components.BaseComponent;
+import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,8 +15,8 @@ public class FaqBlockComponent extends BaseComponent<FaqBlockComponent> {
     @FindBy(xpath = "//div[contains(@class,'tabs-blank__section')]")
     private List<WebElement> faqBlockButton;
 
-    public FaqBlockComponent(WebDriver driver) {
-        super(driver);
+    public FaqBlockComponent(GuiceScoped guiceScoped) {
+        super(guiceScoped);
     }
 
     public List<WebElement> getBlockButtonFaq() {

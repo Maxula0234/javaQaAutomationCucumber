@@ -1,6 +1,7 @@
 package com.otus.components.contacts;
 
 import com.otus.components.BaseComponent;
+import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,8 +37,8 @@ public class SocialMediaComponent extends BaseComponent<SocialMediaComponent> {
     @FindBy(xpath = "//a[text()='Группа в Telegram']")
     private WebElement groupTelegram;
 
-    public SocialMediaComponent(WebDriver driver) {
-        super(driver);
+    public SocialMediaComponent(GuiceScoped guiceScoped) {
+        super(guiceScoped);
     }
 
     public void checkSocialMedia() {
@@ -54,20 +55,20 @@ public class SocialMediaComponent extends BaseComponent<SocialMediaComponent> {
 
     public VkPublicPage goToVk() {
         goToWindow(vk);
-        return new VkPublicPage(driver);
+        return new VkPublicPage(guiceScoped);
     }
 
     public OkPublicPage goToOk() {
         goToWindow(ok);
-        return new OkPublicPage(driver);
+        return new OkPublicPage(guiceScoped);
     }
 
     private void goToWindow(WebElement webElement) {
-        Set<String> windowHandles = driver.getWindowHandles();
+        Set<String> windowHandles = guiceScoped.driver.getWindowHandles();
         webElement.click();
-        Set<String> windowHandlesAfter = driver.getWindowHandles();
+        Set<String> windowHandlesAfter = guiceScoped.driver.getWindowHandles();
         windowHandlesAfter.removeAll(windowHandles);
 
-        driver.switchTo().window(windowHandlesAfter.iterator().next());
+        guiceScoped.driver.switchTo().window(windowHandlesAfter.iterator().next());
     }
 }

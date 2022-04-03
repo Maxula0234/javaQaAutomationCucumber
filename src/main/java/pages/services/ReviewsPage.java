@@ -1,5 +1,6 @@
 package pages.services;
 
+import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,8 +16,8 @@ public class ReviewsPage extends BasePage<ReviewsPage> {
     @FindBy(xpath = "//a[contains(@href,'reviews')]//div[contains(@class,'fvPXwD')]")
     private List<WebElement> reviewsItems;
 
-    public ReviewsPage(WebDriver driver) {
-        super(driver,"/");
+    public ReviewsPage(GuiceScoped guiceScoped) {
+        super(guiceScoped,"/");
     }
 
     public void checkReviewsPage() {

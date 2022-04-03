@@ -1,6 +1,6 @@
 package pages.courses;
 
-import org.openqa.selenium.WebDriver;
+import com.otus.support.GuiceScoped;
 import pages.BasePage;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -10,8 +10,8 @@ public class PythonCoursePage extends BasePage<PythonCoursePage> {
 
     private final String title = "Курс по автоматизации тестирования и поиска неисправностей в бекенде и фронтенде с использованием Selenium и языка Python";
 
-    public PythonCoursePage(WebDriver driver) {
-        super(driver, "/");
+    public PythonCoursePage(GuiceScoped guiceScoped) {
+        super(guiceScoped, "/");
     }
 
     public void checkOpenPage() {

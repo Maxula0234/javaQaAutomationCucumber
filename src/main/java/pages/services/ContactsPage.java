@@ -2,6 +2,7 @@ package pages.services;
 
 import com.otus.components.contacts.SocialMediaComponent;
 import com.otus.helpers.HelperString;
+import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,9 +23,9 @@ public class ContactsPage extends BasePage<ContactsPage> {
     @FindBy(xpath = "//div[text()='Реквизиты']/following-sibling::div")
     private WebElement requisites;
 
-    public ContactsPage(WebDriver driver) {
-        super(driver, "/");
-        socialMediaComponent = new SocialMediaComponent(driver);
+    public ContactsPage(GuiceScoped guiceScoped) {
+        super(guiceScoped, "/");
+        socialMediaComponent = new SocialMediaComponent(guiceScoped);
     }
 
     //    @Step("Проверим отображение реквизитов на странице 'Контакты'")

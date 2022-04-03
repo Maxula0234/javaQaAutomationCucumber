@@ -1,32 +1,54 @@
 package com.otus.dao;
 
+import com.google.inject.Inject;
+import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pages.LessonsBasePage;
 import pages.SpecializationBasePage;
 
+import java.util.Date;
+
 public class CourseTileItem {
-    WebDriver driver;
+    @Inject
+    GuiceScoped guiceScoped;
     private WebElement date;
     private WebElement name;
     private WebElement thisElement;
+    private Date dateStrat;
+
+    public GuiceScoped getGuiceScoped() {
+        return guiceScoped;
+    }
+
+    public void setGuiceScoped(GuiceScoped guiceScoped) {
+        this.guiceScoped = guiceScoped;
+    }
+
+    public Date getDateStrat() {
+        return dateStrat;
+    }
+
+    public void setDateStrat(Date dateStrat) {
+        this.dateStrat = dateStrat;
+    }
 
     public LessonsBasePage goToLesson() {
         thisElement.click();
-        return new LessonsBasePage(driver);
+        return new LessonsBasePage(guiceScoped);
     }
 
     public SpecializationBasePage goToSpecialization() {
         thisElement.click();
-        return new SpecializationBasePage(driver);
+        return new SpecializationBasePage(this.guiceScoped);
     }
 
     public WebDriver getDriver() {
-        return driver;
+        return this.guiceScoped.driver;
     }
 
     public void setDriver(WebDriver driver) {
-        this.driver = driver;
+        this.guiceScoped.driver = driver;
     }
 
     public WebElement getDate() {

@@ -1,5 +1,6 @@
 package pages.services.social_media;
 
+import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,8 +15,8 @@ public class VkPublicPage extends BasePage<VkPublicPage> {
     @FindBy(xpath = "//li[contains(@class,'HeaderNav__item--logo')]")
     private WebElement logoVk;
 
-    public VkPublicPage(WebDriver driver) {
-        super(driver, "/");
+    public VkPublicPage(GuiceScoped guiceScoped) {
+        super(guiceScoped, "/");
     }
 
     public VkPublicPage checkVkPage(String pageTitle) {

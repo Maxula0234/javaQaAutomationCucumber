@@ -1,5 +1,6 @@
 package pages;
 
+import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,8 +12,8 @@ public class SpecializationBasePage extends BasePage<SpecializationBasePage> {
     @FindBy(xpath = "//div[@class='tn-atom' and text()='Специализация']")
     private WebElement elementSpec;
 
-    public SpecializationBasePage(WebDriver driver) {
-        super(driver, "/");
+    public SpecializationBasePage(GuiceScoped guiceScoped) {
+        super(guiceScoped, "/");
     }
 
     public void checkPage() {

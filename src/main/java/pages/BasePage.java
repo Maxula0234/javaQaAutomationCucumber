@@ -1,27 +1,29 @@
 package pages;
 
-import org.openqa.selenium.WebDriver;
+import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.logging.Logger;
+
 public abstract class BasePage<T> {
 
-    protected WebDriver driver;
-
     private final String path;
+    public Logger reporter = Logger.getLogger(BasePage.class.getName());
+    private final GuiceScoped guiceScoped;
 
     @FindBy(tagName = "h1")
     private WebElement header;
 
-    public BasePage(WebDriver driver, String path) {
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
+    public BasePage(GuiceScoped guiceScoped, String path) {
+        this.guiceScoped = guiceScoped;
         this.path = path;
+        PageFactory.initElements(guiceScoped.driver, this);
     }
 
     public T open() {
-        driver.get(System.getProperty("base.url"));
+        guiceScoped.driver.get(System.getProperty("base.url"));
 
         return (T) this;
     }
@@ -33,7 +35,11 @@ public abstract class BasePage<T> {
     }
 
     public String getTitlePage() {
-        return driver.getTitle();
+        return guiceScoped.driver.getTitle();
+    }
+
+    public String getHeader() {
+        return header.getText();
     }
 
 }

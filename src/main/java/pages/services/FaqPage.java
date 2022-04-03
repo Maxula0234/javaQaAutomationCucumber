@@ -1,6 +1,7 @@
 package pages.services;
 
 import com.otus.components.faqPage.FaqBlockComponent;
+import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,9 +20,9 @@ public class FaqPage extends BasePage<FaqPage> {
     @FindBy(xpath = "//div[contains(@class,'faq-question__question')]")
     private List<WebElement> questions;
 
-    public FaqPage(WebDriver driver) {
-        super(driver, "/");
-        faqBlockComponent = new FaqBlockComponent(driver);
+    public FaqPage(GuiceScoped guiceScoped) {
+        super(guiceScoped, "/");
+        faqBlockComponent = new FaqBlockComponent(guiceScoped);
     }
 
     public void checkFaqPage() {
