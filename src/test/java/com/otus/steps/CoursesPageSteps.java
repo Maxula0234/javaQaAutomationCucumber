@@ -5,10 +5,11 @@ import com.otus.support.GuiceScoped;
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.ru.Затем;
 import io.cucumber.java.ru.Тогда;
-import pages.CategoryLessonsPage;
 import pages.LessonsBasePage;
+import pages.PreparatoryСoursesPage;
+import pages.categories.CategoryLessonsPage;
+import pages.categories.ProgrammingCategoriesPage;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -45,5 +46,30 @@ public class CoursesPageSteps {
     @Тогда("открыта страница курса")
     public void checkCoursePgae() {
         lessonsBasePage.checkLessonPage();
+    }
+
+    @Затем("выбираем курс с названием {string}")
+    public void selectCourseByName(String nameCourse) {
+        new ProgrammingCategoriesPage(guiceScoped)
+                .baseCourseTileComponent
+                .clickLessonByName(nameCourse);
+    }
+
+    @Тогда("страница подготовительного курса открыта")
+    public void checkPreparatoryPage() {
+        new PreparatoryСoursesPage(guiceScoped)
+                .checkLessonPage();
+    }
+
+    @Затем("выбираем самый дорогой курс")
+    public void selectMaxCourse() {
+        new CategoryLessonsPage(guiceScoped)
+                .baseCourseTileComponent.getMaxPrice().click();
+    }
+
+    @Затем("выбираем самый дешевый курс")
+    public void selectMinCourse() {
+        new CategoryLessonsPage(guiceScoped)
+                .baseCourseTileComponent.getMinPrice().click();
     }
 }

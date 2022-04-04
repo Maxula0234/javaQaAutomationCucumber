@@ -2,10 +2,9 @@ package com.otus.components;
 
 import com.otus.support.GuiceScoped;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.CategoryLessonsPage;
+import pages.categories.CategoryLessonsPage;
 
 public class NavigationMenuComponent extends BaseComponent<NavigationMenuComponent> {
 

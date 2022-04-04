@@ -2,6 +2,7 @@ package com.otus.steps;
 
 import com.google.inject.Inject;
 import com.otus.components.NavigationMenuComponent;
+import com.otus.components.header_menu.HeaderMenu2Component;
 import com.otus.support.GuiceScoped;
 import io.cucumber.java.ru.Если;
 import io.cucumber.java.ru.Пусть;
@@ -31,4 +32,10 @@ public class MainPageSteps {
                 .clickNavItem(itemName);
     }
 
+    @Тогда("в header выбираем тип курса {string}")
+    public void clickCourses(String typeCourse) {
+        new HeaderMenu2Component(guiceScoped)
+                .moveToCoursesHeaderMenu()
+                .goToCoursesByType(typeCourse);
+    }
 }

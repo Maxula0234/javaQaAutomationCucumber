@@ -2,6 +2,8 @@ package com.otus.components;
 
 import com.otus.support.GuiceScoped;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import pages.LessonsBasePage;
 import pages.SpecializationBasePage;
@@ -23,6 +25,8 @@ public class BaseCourseTileComponent extends BaseComponent<BaseCourseTileCompone
 
     By dateSpecializationStart = By.xpath(".//div[@class='lessons__new-item-time']");
     By dateLessonStart = By.xpath(".//div[@class='lessons__new-item-start']");
+    By nameCourse = By.xpath(".//div[contains(@class,'lessons__new-item-title_with-bg')]");
+    By price = By.xpath(".//div[@class='lessons__new-item-price']");
 
     public BaseCourseTileComponent(GuiceScoped guiceScoped, List<WebElement> lessons) {
         super(guiceScoped);
@@ -142,14 +146,52 @@ public class BaseCourseTileComponent extends BaseComponent<BaseCourseTileCompone
     }
 
     public void clickLessonByName(String nameLesson) {
+        reporter.info("Кликаем по уроку - " + nameLesson);
         WebElement webElement = lessons.stream()
                 .filter(f -> f.getText().contains(nameLesson))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Урок с именем " + nameLesson + " не найден"));
-        webElement.click();
 
+        try {
+            webElement.click();
+        } catch (WebDriverException e) {
+            ((JavascriptExecutor) guiceScoped.driver).executeScript("arguments[0].click()", webElement);
+
+        }
         assertThat(webElement).as("Урок не найден").isNotNull();
     }
 
+    public WebElement getMaxPrice() {
+        Map<WebElement, Double> map = parsePriceLesson();
 
+        Map.Entry<WebElement, Double> webElementDoubleEntry = map.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .orElseThrow(() -> new RuntimeException("НЕ НАЙДЕН САМЫЙ ДОРОГОЙ"));
+
+        return webElementDoubleEntry.getKey();
+    }
+
+    public WebElement getMinPrice() {
+        Map<WebElement, Double> map = parsePriceLesson();
+
+        Map.Entry<WebElement, Double> webElementDoubleEntry = map.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .orElseThrow(() -> new RuntimeException("НЕ НАЙДЕН САМЫЙ ДОРОГОЙ"));
+
+        return webElementDoubleEntry.getKey();
+    }
+
+    private Map<WebElement, Double> parsePriceLesson() {
+        Map<WebElement, Double> map = new HashMap<>();
+
+        lessons.forEach(f -> {
+            Double priceLesson = null;
+            try {
+                priceLesson = Double.parseDouble(f.findElement(price).getText().replace(" ₽", ""));
+                map.put(f, priceLesson);
+            } catch (Exception e) {
+            }
+        });
+        return map;
+    }
 }
