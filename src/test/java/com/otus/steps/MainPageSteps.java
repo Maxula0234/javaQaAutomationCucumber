@@ -6,6 +6,7 @@ import com.otus.components.header_menu.HeaderMenu2Component;
 import com.otus.support.GuiceScoped;
 import io.cucumber.java.ru.Если;
 import io.cucumber.java.ru.Затем;
+import io.cucumber.java.ru.Пусть;
 import io.cucumber.java.ru.Тогда;
 import pages.MainPage;
 import pages.categories.CategoryLessonsPage;
@@ -17,15 +18,15 @@ public class MainPageSteps {
     @Inject
     private MainPage mainPage;
 
-//    @Пусть("^открыта главная страница otus в браузере$")
-//    public void openMainPage() {
-//        mainPage.open();
-//    }
+    @Пусть("^открыта главная страница otus в браузере$")
+    public void openMainPage() {
+        mainPage.open();
+    }
 
-//    @Тогда("главная страница открыта и заголовок {string}")
-//    public void pageShouldBeOpened(String expectedHeader) {
-//        mainPage.pageHeaderShouldBeSameAs(expectedHeader);
-//    }
+    @Тогда("главная страница открыта и заголовок {string}")
+    public void pageShouldBeOpened(String expectedHeader) {
+        mainPage.pageHeaderShouldBeSameAs(expectedHeader);
+    }
 
     @Если("кликнуть на категорию курса {string}")
     public void clickNavMenuItem(String itemName) {
@@ -40,13 +41,4 @@ public class MainPageSteps {
         CategoryLessonsPage categoryLessonsPage = headerMenu2Component1.goToCoursesByType(typeCourse);
     }
 
-    @Тогда("главная страница открыта и заголовок {string}")
-    public void pageShouldBeOpened(String expectedHeader) {
-        mainPage.pageHeaderShouldBeSameAs(expectedHeader);
-    }
-
-    @Затем("открыта главная страница otus в браузере")
-    public void openMainPage() {
-        mainPage.open();
-    }
 }
