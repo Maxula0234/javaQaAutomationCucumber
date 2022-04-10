@@ -1,5 +1,6 @@
 package pages;
 
+import com.otus.annotations.UrlPrefix;
 import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,16 +10,24 @@ import java.util.logging.Logger;
 
 public abstract class BasePage<T> {
 
-    private final String path;
     public Logger reporter = Logger.getLogger(BasePage.class.getName());
     private final GuiceScoped guiceScoped;
 
     @FindBy(tagName = "h1")
     private WebElement header;
 
-    public BasePage(GuiceScoped guiceScoped, String path) {
+    private String getUrlPrefix() {
+        UrlPrefix urlAnnotation = getClass().getAnnotation(UrlPrefix.class);
+        if (urlAnnotation != null) {
+            return urlAnnotation.value();
+        }
+
+        return "";
+    }
+
+    public BasePage(GuiceScoped guiceScoped) {
         this.guiceScoped = guiceScoped;
-        this.path = path;
+//        this.path = path;
         PageFactory.initElements(guiceScoped.driver, this);
     }
 

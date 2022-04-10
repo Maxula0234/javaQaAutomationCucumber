@@ -26,6 +26,8 @@ public class ChromeWebDriver implements IDriver {
     chromeOptions.setCapability(CapabilityType.VERSION, System.getProperty("browser.version", ""));
     chromeOptions.setCapability("enableVNC", Boolean.parseBoolean(System.getProperty("enableVNC", "false")));
     chromeOptions.setHeadless(HEADLESS);
+    chromeOptions.addArguments("--window-size=1920,1080");
+
 
     LoggingPreferences logPrefs = new LoggingPreferences();
     logPrefs.enable(LogType.PERFORMANCE, Level.INFO);

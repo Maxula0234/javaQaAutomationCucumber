@@ -1,5 +1,7 @@
 package pages.categories;
 
+import com.google.inject.Inject;
+import com.otus.annotations.UrlPrefix;
 import com.otus.components.BaseCourseTileComponent;
 import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebElement;
@@ -8,6 +10,7 @@ import pages.BasePage;
 
 import java.util.List;
 
+@UrlPrefix("/")
 public class CategoryLessonsPage extends BasePage<CategoryLessonsPage> {
 
     public BaseCourseTileComponent baseCourseTileComponent;
@@ -15,8 +18,9 @@ public class CategoryLessonsPage extends BasePage<CategoryLessonsPage> {
     @FindBy(xpath = ".//div[@class='lessons__new-item-container']")
     private List<WebElement> lessons;
 
+    @Inject
     public CategoryLessonsPage(GuiceScoped guiceScoped) {
-        super(guiceScoped, "");
+        super(guiceScoped);
         baseCourseTileComponent = new BaseCourseTileComponent(guiceScoped, lessons);
     }
 

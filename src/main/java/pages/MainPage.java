@@ -7,7 +7,7 @@ public class MainPage extends BasePage<MainPage> {
 
     @Inject
     public MainPage(GuiceScoped guiceScoped) {
-        super(guiceScoped, "/");
+        super(guiceScoped);
     }
 
 }

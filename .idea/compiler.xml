@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="javaQaAutomationCucumber" target="8" />
+      <module name="javaQaAutomationCucumber" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

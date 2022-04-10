@@ -1,5 +1,6 @@
 package com.otus.components.contacts;
 
+import com.otus.annotations.Component;
 import com.otus.components.BaseComponent;
 import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +14,7 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-//@Component("//div[contains(@class,'dHdjyV') and text()='Социальные сети']")
+@Component("//div[contains(@class,'dHdjyV') and text()='Социальные сети']")
 public class SocialMediaComponent extends BaseComponent<SocialMediaComponent> {
 
     @FindBy(xpath = "//a[text()='Вконтакте']")

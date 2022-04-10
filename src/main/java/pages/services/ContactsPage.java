@@ -1,9 +1,10 @@
 package pages.services;
 
+import com.google.inject.Inject;
+import com.otus.annotations.UrlPrefix;
 import com.otus.components.contacts.SocialMediaComponent;
 import com.otus.helpers.HelperString;
 import com.otus.support.GuiceScoped;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+@UrlPrefix("/")
 public class ContactsPage extends BasePage<ContactsPage> {
     public SocialMediaComponent socialMediaComponent;
     @FindBy(xpath = "//div[contains(@class,'kfHYcg')]/div[text()='Контакты']")
@@ -23,8 +25,9 @@ public class ContactsPage extends BasePage<ContactsPage> {
     @FindBy(xpath = "//div[text()='Реквизиты']/following-sibling::div")
     private WebElement requisites;
 
+    @Inject
     public ContactsPage(GuiceScoped guiceScoped) {
-        super(guiceScoped, "/");
+        super(guiceScoped);
         socialMediaComponent = new SocialMediaComponent(guiceScoped);
     }
 

@@ -4,19 +4,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 public enum Month {
-    января("JANUARY", 1),
-    февраля("FEBRUARY", 2),
-    марта("MARCH", 3),
-    апреля("APRIL", 4),
-    мая("MAY", 5),
-    июня("JUNE", 6),
-    июля("JULY", 7),
-    августа("AUGUST", 8),
-    сентября("SEPTEMBER", 9),
-    октября("OCTOBER", 10),
-    ноября("NOVEMBER", 11),
-    декабря("DECEMBER", 12);
-
+    январь("янв", 1),
+    февраль("фев", 2),
+    март("мар", 3),
+    апрель("апр", 4),
+    май("мая", 5),
+    июнь("июн", 6),
+    июль("июл", 7),
+    август("авг", 8),
+    сентябрь("сен", 9),
+    октябрь("окт", 10),
+    ноябрь("ноя", 11),
+    декабрь("дек", 12);
 
     private final String month;
     private final int monthNumber;
@@ -31,18 +30,18 @@ public enum Month {
             return 990;
         }
         List<Month> list = new LinkedList<>();
-        list.add(Month.января);
-        list.add(Month.февраля);
-        list.add(Month.марта);
-        list.add(Month.апреля);
-        list.add(Month.мая);
-        list.add(Month.июня);
-        list.add(Month.июля);
-        list.add(Month.августа);
-        list.add(Month.сентября);
-        list.add(Month.октября);
-        list.add(Month.ноября);
-        list.add(Month.декабря);
+        list.add(Month.январь);
+        list.add(Month.февраль);
+        list.add(Month.март);
+        list.add(Month.апрель);
+        list.add(Month.май);
+        list.add(Month.июнь);
+        list.add(Month.июль);
+        list.add(Month.август);
+        list.add(Month.сентябрь);
+        list.add(Month.октябрь);
+        list.add(Month.ноябрь);
+        list.add(Month.декабрь);
 
         Month first = list.stream()
                 .filter(f -> f.name().contains(nameMonth))
@@ -57,5 +56,9 @@ public enum Month {
 
     public int getMonthNumber() {
         return monthNumber;
+    }
+
+    public static String[] getMonths() {
+        return new String[]{январь.getMonth(), февраль.getMonth(), март.getMonth(), апрель.getMonth(), май.getMonth(), июнь.getMonth(), июль.getMonth(), август.getMonth(), сентябрь.getMonth(), октябрь.getMonth(), ноябрь.getMonth(), декабрь.getMonth()};
     }
 }

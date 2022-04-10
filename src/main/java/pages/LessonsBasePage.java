@@ -1,16 +1,17 @@
 package pages;
 
+import com.google.inject.Inject;
+import com.otus.annotations.UrlPrefix;
 import com.otus.support.GuiceScoped;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-//@UrlPrefix("/lessons/")
+@UrlPrefix("/lessons/")
 public class LessonsBasePage extends BasePage<LessonsBasePage> {
 
-    @FindBy(xpath = "//div[@class='course-teachers js-tabs']")
+    @FindBy(css = ".hide-sm .course-teachers")
     private WebElement courseTeacher;
 
     @FindBy(xpath = "//div[@class='course-header2-bottom']")
@@ -19,8 +20,9 @@ public class LessonsBasePage extends BasePage<LessonsBasePage> {
     @FindBy(xpath = "//div[@class='course-about']")
     private WebElement courseAbout;
 
-     public LessonsBasePage(GuiceScoped guiceScoped) {
-        super(guiceScoped, "/");
+    @Inject
+    public LessonsBasePage(GuiceScoped guiceScoped) {
+        super(guiceScoped);
     }
 
     public void checkLessonPage() {
