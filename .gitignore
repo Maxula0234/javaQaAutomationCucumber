@@ -4,5 +4,4 @@
 # Log file
 *.log
 
-idea/
-target/
+.idea
