@@ -1,11 +1,13 @@
 package com.otus.components;
 
+import com.otus.annotations.Component;
 import com.otus.support.GuiceScoped;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.categories.CategoryLessonsPage;
 
+@Component(".nav:not(.hide-xs) .course-categories__nav-box")
 public class NavigationMenuComponent extends BaseComponent<NavigationMenuComponent> {
 
     @FindBy(css = ".nav:not(.hide-xs) .course-categories__nav-box")

@@ -55,7 +55,7 @@
             <artifactId>junit-bom</artifactId>
             <version>${junit.version}</version>
             <type>pom</type>
-            <scope>import</scope>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>

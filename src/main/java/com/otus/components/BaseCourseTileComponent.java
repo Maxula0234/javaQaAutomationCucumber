@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.LessonsBasePage;
 import pages.SpecializationBasePage;
 
@@ -26,10 +27,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BaseCourseTileComponent extends BaseComponent<BaseCourseTileComponent> {
     List<WebElement> lessons;
 
-    private By dateSpecializationStart = By.xpath(".//div[@class='lessons__new-item-time']");
-    private By dateLessonStart = By.xpath(".//div[@class='lessons__new-item-start']");
-    private By nameCourse = By.xpath(".//div[contains(@class,'lessons__new-item-title_with-bg')]");
-    private By price = By.xpath(".//div[@class='lessons__new-item-price']");
+    private final By dateSpecializationStart = By.xpath(".//div[@class='lessons__new-item-time']");
+    private final By dateLessonStart = By.xpath(".//div[@class='lessons__new-item-start']");
+    private final By nameCourse = By.xpath(".//div[contains(@class,'lessons__new-item-title_with-bg')]");
+    private final By price = By.xpath(".//div[@class='lessons__new-item-price']");
 
     public BaseCourseTileComponent(GuiceScoped guiceScoped, List<WebElement> lessons) {
         super(guiceScoped);
@@ -91,6 +92,7 @@ public class BaseCourseTileComponent extends BaseComponent<BaseCourseTileCompone
                 startDateCourseV2 = getDateFromTileLesson(f, dateStart);
                 map.put(f, startDateCourseV2);
             } catch (Exception e) {
+                reporter.info(e.getMessage());
             }
         });
         return map;
@@ -115,7 +117,7 @@ public class BaseCourseTileComponent extends BaseComponent<BaseCourseTileCompone
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Не найден курс до даты - " + date.toString()));
 
-        webElementLocalDateEntry.getKey().click();
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(webElementLocalDateEntry.getKey())).click();
         LessonsBasePage lessonsBasePage = new LessonsBasePage(guiceScoped);
 
         reporter.info("Открыли кура \"" + lessonsBasePage.getHeader() + "\" дата = " + date);
@@ -188,11 +190,12 @@ public class BaseCourseTileComponent extends BaseComponent<BaseCourseTileCompone
         Map<WebElement, Double> map = new HashMap<>();
 
         lessons.forEach(lesson -> {
-            Double priceLesson = null;
+            Double priceLesson;
             try {
                 priceLesson = Double.parseDouble(lesson.findElement(price).getText().replace(" ₽", ""));
                 map.put(lesson, priceLesson);
             } catch (Exception e) {
+                reporter.info(e.getMessage());
             }
         });
         return map;

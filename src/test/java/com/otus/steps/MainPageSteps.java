@@ -5,7 +5,6 @@ import com.otus.components.NavigationMenuComponent;
 import com.otus.components.header_menu.HeaderMenu2Component;
 import com.otus.support.GuiceScoped;
 import io.cucumber.java.ru.Если;
-import io.cucumber.java.ru.Затем;
 import io.cucumber.java.ru.Пусть;
 import io.cucumber.java.ru.Тогда;
 import pages.MainPage;
@@ -20,7 +19,7 @@ public class MainPageSteps {
 
     @Пусть("^открыта главная страница otus в браузере$")
     public void openMainPage() {
-        mainPage.open();
+        mainPage.open().acceptCookie();
     }
 
     @Тогда("главная страница открыта и заголовок {string}")

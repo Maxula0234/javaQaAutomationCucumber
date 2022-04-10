@@ -19,3 +19,6 @@
 * File Encoding - UTF-8
 
 * Конфигурация для запуска тестов - "test -Dcucumber.filter.tags=@debug"
+* Конфигурация для дебага - -DforkCount=0 test -Dcucumber.filter.tags=@course_category
+* Настройка логгера 
+![img.png](img.png)
