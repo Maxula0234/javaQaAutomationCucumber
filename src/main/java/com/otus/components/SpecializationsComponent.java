@@ -1,12 +1,13 @@
 package com.otus.components;
 
+import com.otus.annotations.Component;
 import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-//@Component("//div[@class='container container-lessons']//div[@class='container-padding-bottom']")
+@Component("//div[contains(@class,'container-lessons')]//div[@class='container-padding-bottom']")
 public class SpecializationsComponent extends BaseComponent<SpecializationsComponent> {
     public BaseCourseTileComponent baseCourseTileComponent;
 

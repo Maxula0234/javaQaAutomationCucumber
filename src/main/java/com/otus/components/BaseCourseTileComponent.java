@@ -1,10 +1,13 @@
 package com.otus.components;
 
+import com.otus.annotations.Component;
+import com.otus.constant.Month;
 import com.otus.support.GuiceScoped;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.LessonsBasePage;
 import pages.SpecializationBasePage;
 
@@ -20,13 +23,14 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Component("//header[@class='header2_subheader']")
 public class BaseCourseTileComponent extends BaseComponent<BaseCourseTileComponent> {
     List<WebElement> lessons;
 
-    By dateSpecializationStart = By.xpath(".//div[@class='lessons__new-item-time']");
-    By dateLessonStart = By.xpath(".//div[@class='lessons__new-item-start']");
-    By nameCourse = By.xpath(".//div[contains(@class,'lessons__new-item-title_with-bg')]");
-    By price = By.xpath(".//div[@class='lessons__new-item-price']");
+    private final By dateSpecializationStart = By.xpath(".//div[@class='lessons__new-item-time']");
+    private final By dateLessonStart = By.xpath(".//div[@class='lessons__new-item-start']");
+    private final By nameCourse = By.xpath(".//div[contains(@class,'lessons__new-item-title_with-bg')]");
+    private final By price = By.xpath(".//div[@class='lessons__new-item-price']");
 
     public BaseCourseTileComponent(GuiceScoped guiceScoped, List<WebElement> lessons) {
         super(guiceScoped);
@@ -59,7 +63,7 @@ public class BaseCourseTileComponent extends BaseComponent<BaseCourseTileCompone
         Matcher matcher = pattern.matcher(date);
 
         DateFormatSymbols symbols = new DateFormatSymbols(new Locale("ru"));
-        String[] shortestMonths = new String[]{"янв", "фев", "мар", "апр", "мая", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"};
+        String[] shortestMonths = Month.getMonths();
         symbols.setShortMonths(shortestMonths);
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM", symbols);
@@ -88,6 +92,7 @@ public class BaseCourseTileComponent extends BaseComponent<BaseCourseTileCompone
                 startDateCourseV2 = getDateFromTileLesson(f, dateStart);
                 map.put(f, startDateCourseV2);
             } catch (Exception e) {
+                reporter.info(e.getMessage());
             }
         });
         return map;
@@ -112,7 +117,7 @@ public class BaseCourseTileComponent extends BaseComponent<BaseCourseTileCompone
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Не найден курс до даты - " + date.toString()));
 
-        webElementLocalDateEntry.getKey().click();
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(webElementLocalDateEntry.getKey())).click();
         LessonsBasePage lessonsBasePage = new LessonsBasePage(guiceScoped);
 
         reporter.info("Открыли кура \"" + lessonsBasePage.getHeader() + "\" дата = " + date);
@@ -175,7 +180,7 @@ public class BaseCourseTileComponent extends BaseComponent<BaseCourseTileCompone
         Map<WebElement, Double> map = parsePriceLesson();
 
         Map.Entry<WebElement, Double> webElementDoubleEntry = map.entrySet().stream()
-                .max(Map.Entry.comparingByValue())
+                .min(Map.Entry.comparingByValue())
                 .orElseThrow(() -> new RuntimeException("НЕ НАЙДЕН САМЫЙ ДОРОГОЙ"));
 
         return webElementDoubleEntry.getKey();
@@ -184,12 +189,13 @@ public class BaseCourseTileComponent extends BaseComponent<BaseCourseTileCompone
     private Map<WebElement, Double> parsePriceLesson() {
         Map<WebElement, Double> map = new HashMap<>();
 
-        lessons.forEach(f -> {
-            Double priceLesson = null;
+        lessons.forEach(lesson -> {
+            Double priceLesson;
             try {
-                priceLesson = Double.parseDouble(f.findElement(price).getText().replace(" ₽", ""));
-                map.put(f, priceLesson);
+                priceLesson = Double.parseDouble(lesson.findElement(price).getText().replace(" ₽", ""));
+                map.put(lesson, priceLesson);
             } catch (Exception e) {
+                reporter.info(e.getMessage());
             }
         });
         return map;

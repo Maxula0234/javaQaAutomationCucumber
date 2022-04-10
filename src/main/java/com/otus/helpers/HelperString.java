@@ -11,7 +11,6 @@ public class HelperString {
 
         collect.forEach(f -> {
             String[] s = f.split(" ", 2);
-            f.split(" ", 2);
 
             if (s.length > 1)
                 data.put(s[0], s[1]);

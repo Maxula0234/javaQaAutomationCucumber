@@ -1,8 +1,8 @@
 package com.otus.components.header_menu;
 
+import com.otus.annotations.Component;
 import com.otus.components.BaseComponent;
 import com.otus.support.GuiceScoped;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.services.ContactsPage;
@@ -10,7 +10,7 @@ import pages.services.FaqPage;
 import pages.services.ReviewsPage;
 import pages.services.SubscriptionPage;
 
-//@Component("//header[@class='header2_subheader']")
+@Component("//header[@class='header2_subheader']")
 public class HeaderMenu1Component extends BaseComponent<HeaderMenu1Component> {
 
     @FindBy(xpath = ".//a[@title='Подписка']")

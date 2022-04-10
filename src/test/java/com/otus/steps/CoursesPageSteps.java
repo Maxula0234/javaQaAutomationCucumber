@@ -33,7 +33,7 @@ public class CoursesPageSteps {
 
     @Затем("выбираем курс стартующий после {mydate}")
     public void selectCourseAfterDate(LocalDate date) {
-        LessonsBasePage lessonsBasePage = new CategoryLessonsPage(guiceScoped)
+        new CategoryLessonsPage(guiceScoped)
                 .baseCourseTileComponent.clickLessonAfterDate(date);
     }
 

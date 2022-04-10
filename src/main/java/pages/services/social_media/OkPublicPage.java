@@ -1,5 +1,6 @@
 package pages.services.social_media;
 
+import com.google.inject.Inject;
 import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,8 +16,9 @@ public class OkPublicPage extends BasePage<OkPublicPage> {
     @FindBy(xpath = "//div[@class='toolbar_logo_img']")
     private WebElement logoOk;
 
+    @Inject
     public OkPublicPage(GuiceScoped guiceScoped) {
-        super(guiceScoped,"/");
+        super(guiceScoped);
     }
 
     public OkPublicPage checkVkPage(String pageTitle) {

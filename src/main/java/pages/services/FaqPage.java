@@ -1,5 +1,7 @@
 package pages.services;
 
+import com.google.inject.Inject;
+import com.otus.annotations.UrlPrefix;
 import com.otus.components.faqPage.FaqBlockComponent;
 import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +14,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-//@UrlPrefix("/faq")
+@UrlPrefix("/faq")
 public class FaqPage extends BasePage<FaqPage> {
     public FaqBlockComponent faqBlockComponent;
     @FindBy(xpath = "//h1[normalize-space(text())='Отвечаем на ваши']")
@@ -20,8 +22,9 @@ public class FaqPage extends BasePage<FaqPage> {
     @FindBy(xpath = "//div[contains(@class,'faq-question__question')]")
     private List<WebElement> questions;
 
+    @Inject
     public FaqPage(GuiceScoped guiceScoped) {
-        super(guiceScoped, "/");
+        super(guiceScoped);
         faqBlockComponent = new FaqBlockComponent(guiceScoped);
     }
 

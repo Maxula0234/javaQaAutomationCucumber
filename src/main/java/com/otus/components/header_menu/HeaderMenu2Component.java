@@ -1,5 +1,6 @@
 package com.otus.components.header_menu;
 
+import com.otus.annotations.Component;
 import com.otus.components.BaseComponent;
 import com.otus.support.GuiceScoped;
 import org.openqa.selenium.WebElement;
@@ -8,8 +9,7 @@ import pages.categories.CategoryLessonsPage;
 import pages.courses.KotlinCoursePage;
 import pages.courses.PythonCoursePage;
 
-////todo убрать по два класса в СЕЛЕКТОРАХ
-//@Component("//div[contains(@class,'container-header2')]")
+@Component("//div[contains(@class,'container-header2')]")
 public class HeaderMenu2Component extends BaseComponent<HeaderMenu2Component> {
 
     @FindBy(xpath = ".//p[normalize-space(text())='Курсы']")
