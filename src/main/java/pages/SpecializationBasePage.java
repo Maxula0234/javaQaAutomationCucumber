@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@UrlPrefix("/")
+@UrlPrefix("/lessons/")
 public class SpecializationBasePage extends BasePage<SpecializationBasePage> {
 
     @FindBy(xpath = "//div[@class='tn-atom' and text()='Специализация']")

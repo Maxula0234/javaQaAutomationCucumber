@@ -6,7 +6,7 @@ import io.cucumber.java.ParameterType;
 import io.cucumber.java.ru.Затем;
 import io.cucumber.java.ru.Тогда;
 import pages.LessonsBasePage;
-import pages.PreparatoryСoursesPage;
+import pages.PreparatoryCoursesPage;
 import pages.categories.CategoryLessonsPage;
 import pages.categories.ProgrammingCategoriesPage;
 
@@ -57,7 +57,7 @@ public class CoursesPageSteps {
 
     @Тогда("страница подготовительного курса открыта")
     public void checkPreparatoryPage() {
-        new PreparatoryСoursesPage(guiceScoped)
+        new PreparatoryCoursesPage(guiceScoped)
                 .checkLessonPage();
     }
 
