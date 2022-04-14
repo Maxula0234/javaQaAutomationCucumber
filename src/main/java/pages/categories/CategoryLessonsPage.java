@@ -10,7 +10,7 @@ import pages.BasePage;
 
 import java.util.List;
 
-@UrlPrefix("/")
+@UrlPrefix("/categories/")
 public class CategoryLessonsPage extends BasePage<CategoryLessonsPage> {
 
     public BaseCourseTileComponent baseCourseTileComponent;

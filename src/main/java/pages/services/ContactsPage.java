@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-@UrlPrefix("/")
+@UrlPrefix("/contacts")
 public class ContactsPage extends BasePage<ContactsPage> {
     public SocialMediaComponent socialMediaComponent;
     @FindBy(xpath = "//div[contains(@class,'kfHYcg')]/div[text()='Контакты']")

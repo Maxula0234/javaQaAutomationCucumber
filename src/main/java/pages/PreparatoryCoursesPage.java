@@ -8,14 +8,14 @@ import org.openqa.selenium.support.FindBy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@UrlPrefix("/")
-public class PreparatoryСoursesPage extends BasePage<PreparatoryСoursesPage> {
+@UrlPrefix("/online/")
+public class PreparatoryCoursesPage extends BasePage<PreparatoryCoursesPage> {
 
     @FindBy(xpath = "//div[@class='preparatory-intro__title']")
     private WebElement titleNameCourse;
 
     @Inject
-    public PreparatoryСoursesPage(GuiceScoped guiceScoped) {
+    public PreparatoryCoursesPage(GuiceScoped guiceScoped) {
         super(guiceScoped);
     }
 
